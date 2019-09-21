@@ -36,6 +36,8 @@ Resources:
     Properties:
       ImageId: !FindInMap [RegionMap, !Ref "AWS::Region", LINUX] # Dynamic mapping + Pseudo Parameter
       InstanceType: !FindInMap [InstanceSize, !Ref EnvironmentSize, EC2]
+      SecurityGroupIds:
+        - !Ref SG
       KeyName: testkeypair
       UserData:
         "Fn::Base64":
