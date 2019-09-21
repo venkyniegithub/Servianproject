@@ -53,4 +53,17 @@ Resources:
             sed -i 's/localhost/${DB.Endpoint.Address}/g' wp-config.php
             sed -i 's/username_here/${DatabaseUser}/g' wp-config.php
             sed -i 's/password_here/${DatabasePassword}/g' wp-config.php
-
+  SG:
+    Type: "AWS::EC2::SecurityGroup"
+    Properties:
+      GroupDescription: SG to allow http access
+      SecurityGroupIngress:
+        - CidrIp: 0.0.0.0/0
+          IpProtocol: tcp
+          ToPort: 80
+          FromPort: 80
+      SecurityGroupEgress:
+        - CidrIp: 0.0.0.0/0
+          IpProtocol: tcp
+          ToPort: 80
+          FromPort: 80          
