@@ -31,6 +31,8 @@ Resources:
       Engine: MySQL
       MasterUsername: !Ref DatabaseUser
       MasterUserPassword: !Ref DatabasePassword
+      VPCSecurityGroups:
+        - !Ref DBSG
   EC2:
     Type: "AWS::EC2::Instance"
     Properties:
@@ -64,4 +66,13 @@ Resources:
           IpProtocol: tcp
           ToPort: 80
           FromPort: 80
-    
+  DBSG:
+    Type: "AWS::EC2::SecurityGroup"
+    Properties:
+      GroupDescription: SG to allow DB access
+      VpcId: vpc-3ad6fc53
+      SecurityGroupIngress:
+        - CidrIp: 172.31.0.0/18
+          IpProtocol: tcp
+          ToPort: 3306
+          FromPort: 3306
